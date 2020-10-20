@@ -9,12 +9,13 @@ class ViewRecordPage  extends StatefulWidget{
 
   const ViewRecordPage ({ Key key, this.recordid }): super(key: key);
   @override
-  State createState() => new ViewRecordPageState();
+  State createState() => new ViewRecordPageState(this.recordid);
 }
 
 class ViewRecordPageState extends State<ViewRecordPage> {
-  
+  String recordid;
 
+ViewRecordPageState(this.recordid);
   @override
   Widget build (BuildContext ctxt) {
       return new Scaffold(
@@ -32,14 +33,17 @@ class ViewRecordPageState extends State<ViewRecordPage> {
                 }
                 break;
                 case ConnectionState.done:{
-                  return  Column(
+                  return  SingleChildScrollView(
+                    child: 
+                      Column(
                           children: <Widget>[
                             TextField(
                               decoration: InputDecoration(
                                 labelText: 'Inpatient or Outpatient',
                                 prefixIcon: SizedBox(),
                               ),
-                              controller: snap.data["inoroutpatient"],
+                              enabled: false,
+                              controller: TextEditingController(text:snap.data[0]["inoroutpatient"]),
                             ),
                             TextField(
                               maxLines: 3,
@@ -48,7 +52,8 @@ class ViewRecordPageState extends State<ViewRecordPage> {
                                 labelText: 'Anamnesis',
                                 prefixIcon: Icon(Icons.text_fields),
                               ),
-                              controller: snap.data["anamnesis"],
+                              enabled: false,
+                              controller: TextEditingController(text:snap.data[0]["anamnesis"]),
                             ),
                             
                             TextField(
@@ -58,7 +63,8 @@ class ViewRecordPageState extends State<ViewRecordPage> {
                                 labelText: 'Physical Examination',
                                 prefixIcon: Icon(Icons.text_fields),
                               ),
-                              controller: snap.data["physicalExamination"],
+                              enabled: false,
+                              controller: TextEditingController(text:snap.data[0]["physicalExamination"]),
                             ),
                             TextField(
                               maxLines: 3,
@@ -67,7 +73,8 @@ class ViewRecordPageState extends State<ViewRecordPage> {
                                 labelText: 'Diagnosis',
                                 prefixIcon: Icon(Icons.text_fields),
                               ),
-                              controller: snap.data["diagnosis"],
+                              enabled: false,
+                              controller: TextEditingController(text:snap.data[0]["diagnosis"]),
                             ),
                             TextField(
                               maxLines: 3,
@@ -76,7 +83,8 @@ class ViewRecordPageState extends State<ViewRecordPage> {
                                 labelText: 'Medical Treatment',
                                 prefixIcon: Icon(Icons.text_fields),
                               ),
-                              controller: snap.data["medicalTreatment"],
+                              enabled: false,
+                              controller: TextEditingController(text:snap.data[0]["medicalTreatment"]),
                             ),
                             TextField(
                               maxLines: 3,
@@ -85,7 +93,8 @@ class ViewRecordPageState extends State<ViewRecordPage> {
                                 labelText: 'Medicine',
                                 prefixIcon: Icon(Icons.text_fields),
                               ),
-                              controller: snap.data["medicine"],
+                              enabled: false,
+                              controller: TextEditingController(text:snap.data[0]["medicine"]),
                             ),
                             TextField(
                               maxLines: 1,
@@ -94,7 +103,8 @@ class ViewRecordPageState extends State<ViewRecordPage> {
                                 labelText: 'Doctor',
                                 prefixIcon: Icon(Icons.person),
                               ),
-                              controller: snap.data["docter"],
+                              enabled: false,
+                              controller: TextEditingController(text:snap.data[0]["docter"]),
                             ),
                             TextField(
                               maxLines: 3,
@@ -103,14 +113,18 @@ class ViewRecordPageState extends State<ViewRecordPage> {
                                 labelText: 'Hospital / Clinic',
                                 prefixIcon: Icon(Icons.local_hospital),
                               ),
-                              controller: snap.data["hospital"],
+                              enabled: false,
+                              controller: TextEditingController(text:snap.data[0]["hospital"]),
                             ),
                             Padding(
                               padding: EdgeInsets.only(
                                   left: 25.0, right: 20.0, top: 15.0,bottom: 30),
                              ),
                           ],
-                        );
+                        )
+                  );
+                  
+                  
                       
                 }break;
                 default:{

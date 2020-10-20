@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medrec/core/presentation/res/assets.dart';
 import 'package:medrec/src/pages/forms/add_record.dart';
+import 'package:medrec/src/pages/forms/view_record.dart';
 import 'package:medrec/src/services/database_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -73,7 +74,7 @@ final datef = new DateFormat('dd-MMM-yyyy hh:mm');
                           title: Text('${sickInfo[index]["anamnesis"]}'),
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(
-                                  builder: (BuildContext context) => AddMedicalReCordPage()
+                                  builder: (BuildContext context) => ViewRecordPage(recordid: '${sickInfo[index]["recordid"]}')
                                 ));
                           },
                           subtitle: Text(

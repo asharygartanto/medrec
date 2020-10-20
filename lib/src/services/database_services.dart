@@ -34,7 +34,7 @@ class DatabaseServices{
   String hospital, DateTime time1}) async{
     await userRecordsCollection.doc().set({
       "userid":userid,
-      "recordid":userProfileCollection.doc(userid).id+DateTime.now().year.toString()+DateTime.now().month.toString()+DateTime.now().day.toString()+DateTime.now().hour.toString(),
+      "recordid":userProfileCollection.doc(userid).id+DateTime.now().year.toString()+DateTime.now().month.toString()+DateTime.now().day.toString()+DateTime.now().hour.toString()+DateTime.now().minute.toString()+DateTime.now().second.toString(),
       "inoroutpatient":inoroutpatient,
       "anamnesis":anamnesis,
       "physicalExamination":physicalExamination,
