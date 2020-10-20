@@ -243,23 +243,6 @@ class _BottomBarState extends State<BottomBar> {
     return index == _activeInndex ? color : Colors.grey[300];
   }
 
-  final circularMenu = CircularMenu(items: [
-    CircularMenuItem(icon: Icons.home, onTap: () {log("message");
-      // callback
-    }),
-    CircularMenuItem(icon: Icons.search, onTap: () {
-      //callback
-    }),
-    CircularMenuItem(icon: Icons.settings, onTap: () {
-      //callback
-    }),
-   /* CircularMenuItem(icon: Icons.star, onTap: () {
-      //callback
-    }),
-    CircularMenuItem(icon: Icons.pages, onTap: () {
-      //callback
-    }),*/
-  ]);
 
   void _newTaskModalBottomSheet(context){
     showModalBottomSheet(
