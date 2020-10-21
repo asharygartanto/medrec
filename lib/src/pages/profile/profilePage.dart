@@ -35,6 +35,7 @@ class MapScreenState extends State<ProfilePage>
           backgroundColor:  Colors.blue,
           
          ),
+        
         body: 
         SlidingUpPanel(
       renderPanelSheet: false,

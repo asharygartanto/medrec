@@ -5,13 +5,8 @@ import 'package:medrec/src/pages/doctors/doctorList.dart';
 import 'package:medrec/src/pages/forms/add_record.dart';
 import 'package:medrec/src/pages/history/mainHistory.dart';
 import 'package:medrec/src/pages/history/sick_list_stateful.dart';
-import 'package:medrec/src/pages/history/sicks_list.dart';
 import 'package:medrec/src/pages/home/home.dart';
-import 'package:medrec/src/pages/profile/profile.dart';
 import 'package:medrec/src/pages/profile/profilePage.dart';
-import 'package:fab_circular_menu/fab_circular_menu.dart';
-import 'package:circular_menu/circular_menu.dart';
-import 'package:medrec/src/widgets/menu/circularMenu.dart';
 
 //Color color = Colors.blue;
 
@@ -21,7 +16,7 @@ class BottomBar extends StatefulWidget {
   final Function(int index) onChangeActiveTab;
   final int activeInndex;
 
-  const BottomBar({Key key, this.onChangeActiveTab, this.activeInndex = 0})
+  const BottomBar({Key key, this.onChangeActiveTab, this.activeInndex})
       : super(key: key);
 
   @override
@@ -220,6 +215,7 @@ class _BottomBarState extends State<BottomBar> {
                       builder: (BuildContext context) => ProfilePage()
                     ));
                   }
+                 // widget.onChangeActiveTab(index);
               }
             },
           ),

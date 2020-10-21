@@ -25,11 +25,11 @@ class _MyHomePageState extends State<MyHomePage> {
   String _doctorName="";
   
 
-  void onTapped(int value) {
+  /*void onTapped(int value) {
     setState(() {
       _selectedIndex = value;
     });
-  }
+  }*/
   _MyHomePageState(){
     _getName().then((val) => setState(() {
           _name = val;

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1013461642763",
+    "firebase_url": "https://medrec-2dbb8.firebaseio.com",
+    "project_id": "medrec-2dbb8",
+    "storage_bucket": "medrec-2dbb8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013461642763:android:dcc7c949abc44c50f3210e",
+        "android_client_info": {
+          "package_name": "com.example.medrec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013461642763-9jlejftrcenml66na9rs6mp5di6av4hc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfivCIlMDYnJ_MWVxuJrtqZi0BRNd6wd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013461642763-9jlejftrcenml66na9rs6mp5di6av4hc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

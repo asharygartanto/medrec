@@ -18,11 +18,11 @@ class _MyDoctorListPageState extends State<MyDoctorListPage> {
   int _selectedIndex = 2;
   
 
-  void onTapped(int value) {
+  /*void onTapped(int value) {
     setState(() {
       _selectedIndex = value;
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
