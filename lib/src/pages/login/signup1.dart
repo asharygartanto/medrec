@@ -32,7 +32,7 @@ class SignupOnePage extends StatelessWidget {
                           width: 110.0,
                           height: 110.0,
                           fit: BoxFit.fill,
-                          image: new AssetImage(img_medical2)
+                          image: new AssetImage(img_medical3)
                           )
                           , maxRadius: 50, backgroundColor: Colors.transparent,),
           //CircleAvatar(child: PNetworkImage(origami), maxRadius: 50, backgroundColor: Colors.transparent,),

@@ -4,6 +4,10 @@ import 'package:medrec/core/presentation/res/assets.dart';
 import 'package:medrec/core/presentation/res/utisl.dart';
 import 'package:medrec/core/presentation/widgets/moods.dart';
 import 'package:medrec/lib/header/appheader.dart';
+import 'package:medrec/src/pages/doctors/doctorList.dart';
+import 'package:medrec/src/pages/forms/add_record.dart';
+import 'package:medrec/src/pages/forms/view_record.dart';
+import 'package:medrec/src/pages/history/sick_list_stateful.dart';
 import 'package:medrec/src/services/database_services.dart';
 import 'package:medrec/src/widgets/menu/bottomMenu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,6 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String _name="";
   String _firstname="";
   String _doctorName="";
+  String _recordid="";
   
 
   /*void onTapped(int value) {
@@ -41,14 +46,49 @@ class _MyHomePageState extends State<MyHomePage> {
           
         }));
 
+     _getLastRecordid().then((value) => setState(() {
+          _recordid = value;
+          
+        }));
+
   }
 
   @override
   Widget build(BuildContext context) {
+    int _selectedPage = 0;
     Size media = MediaQuery.of(context).size;
     return Scaffold(
       appBar: MedRecAppBar(),
       backgroundColor: mainBgColor,
+      /*bottomNavigationBar: BottomNavigationBar(
+        fixedColor: Colors.blue,
+        backgroundColor: Colors.blue,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.phone_android),
+            title: Text('First Page'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.phone_android),
+            title: Text('Second Page'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.phone_android),
+            title: Text('Second Page'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.phone_android),
+            title: Text('Second Page'),
+          ),
+        ],
+        currentIndex: _selectedPage,
+        onTap: (int index) {
+              setState(() {
+                _selectedPage = index;
+                  }
+                );  
+        },
+      ),*/
       body: Container(
       height: media.height,
       width: media.width,
@@ -78,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    _notificationCard(),
+                    _notificationCard(_recordid),
                     _nextAppointmentText(),
                     _appoinmentCard(),
                     //_areaSpecialistsText(),
@@ -100,6 +140,22 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 70,
             child: BottomBar(activeInndex: 0 ,),
           ),
+          
+
+      /*Positioned(
+          bottom: 0,
+          width: MediaQuery.of(context).size.width,
+          child: Container(
+            alignment: Alignment.bottomCenter,
+            child: FloatingActionButton(
+              onPressed: (){
+              _newTaskModalBottomSheet(context);
+            },
+            child: new Icon(Icons.add),
+            )
+          )
+        ),*/
+
       /*bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -217,14 +273,14 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.black,
             ),
           ),
-          Text(
+          /*Text(
             'See All',
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
               color: midColor,
             ),
-          ),
+          ),*/
         ],
       ),
     );
@@ -333,7 +389,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Container _notificationCard() {
+  Container _notificationCard(String recordid) {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -356,7 +412,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         trailing: OutlineButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(
+                                  builder: (BuildContext context) => ViewRecordPage(recordid: recordid)
+                                ));
+          },
           color: Colors.transparent,
           borderSide: BorderSide(
             color: Colors.white,
@@ -400,5 +460,53 @@ class _MyHomePageState extends State<MyHomePage> {
    return snapshot.docs[0]["docter"].toString();
       
   }
+
+  Future<String> _getLastRecordid() async {
+    
+   QuerySnapshot snapshot= await DatabaseServices.getLastRecordid(FirebaseAuth.instance.currentUser.uid);
+   return snapshot.docs[0]["recordid"].toString();
+      
+  }
+
+  void _newTaskModalBottomSheet(context){
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext bc){
+          return Container(
+            child: new Wrap(
+            children: <Widget>[
+          new ListTile(
+            leading: new Icon(Icons.note_add),
+            title: new Text('Add Record'),
+            onTap: () => {
+              Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) => AddMedicalReCordPage()
+                  ))
+            }          
+          ),
+          new ListTile(
+            leading: new Icon(Icons.history),
+            title: new Text('Record History'),
+            onTap: () => {
+               Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) => SicksList2Page()
+                  ))
+            },          
+          ),
+          new ListTile(
+            leading: new Icon(Icons.calendar_today),
+            title: new Text('Add Schedule'),
+            onTap: () => {
+               Navigator.push(context, MaterialPageRoute(
+                    builder: (BuildContext context) => MyDoctorListPage()
+                  ))
+            },          
+          ),
+            ],
+          ),
+          );
+      }
+    );
+}
   
 }

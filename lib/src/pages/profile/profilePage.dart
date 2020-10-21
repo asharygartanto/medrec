@@ -3,11 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:medrec/src/pages/chart/bloodPresure.dart';
 import 'package:medrec/src/pages/forms/blood_presure_input.dart';
+import 'package:medrec/src/pages/profile/edit_profile.dart';
 import 'package:medrec/src/pages/qr/generate_qr.dart';
 import 'package:medrec/src/pages/qr/scan_qr.dart';
+import 'package:medrec/src/services/database_services.dart';
 import 'package:medrec/src/widgets/menu/bottomMenu.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -31,6 +35,8 @@ class MapScreenState extends State<ProfilePage>
     Size media = MediaQuery.of(context).size;
     return new Scaffold(
          appBar : new AppBar(
+           title: Center(
+             child :Text("Your Profile",)) ,
           //elevation: 0.7,
           backgroundColor:  Colors.blue,
           
@@ -170,6 +176,7 @@ class MapScreenState extends State<ProfilePage>
                                         ),
                                         enabled: !_status,
                                         autofocus: !_status,
+                                        controller: TextEditingController(text: "ashary gartanto"),
 
                                       ),
                                     ),
@@ -611,9 +618,12 @@ class MapScreenState extends State<ProfilePage>
         ),
       ),
       onTap: () {
-        setState(() {
+        Navigator.push(context, MaterialPageRoute(
+                                  builder: (BuildContext context) => EditProfilePage()
+                                ));
+        /*setState(() {
           _status = false;
-        });
+        });*/
       },
     );
   }
@@ -699,5 +709,13 @@ class MapScreenState extends State<ProfilePage>
         /**/,
       ),
     );
+  }
+
+  Future<DocumentSnapshot> _getUserProfile() async {
+    
+   DocumentSnapshot snapshot= await DatabaseServices.getUserProfile(FirebaseAuth.instance.currentUser.uid);
+   print(snapshot.data()["fullname"]);
+   return snapshot.data()["fullname"];
+      
   }
 }

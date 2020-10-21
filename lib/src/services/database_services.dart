@@ -4,12 +4,24 @@ class DatabaseServices{
   static CollectionReference userProfileCollection = Firestore.instance.collection("userProfile");
   static CollectionReference userRecordsCollection = Firestore.instance.collection("userRecords");
 
-  static Future<void> createOrUpdateUserProfile(String id,{String fullname, String address,String phone,}) async{
+  static Future<void> createOrUpdateUserProfile(String id,{String fullname, String address,String phone,DateTime dateofbirth,
+  String placeofbirth,String ktp,String height, String weight,String allergic,String emergencycontactname,String emergencycontactnumber,
+  String bloodtype}) async{
     await userProfileCollection.doc(id).set({
       "fullname":fullname,
-      
       "address":address,
-      "phone":phone
+      "phone":phone,
+      "dateofbirth":dateofbirth,
+      "placeofbirth":placeofbirth,
+      "ktp":ktp,
+      "allergic":allergic,
+      "bloodtype":bloodtype,
+      "height":height,
+      "weight":weight,
+      "emergencycontactname":emergencycontactname,
+      "emergencycontactnumber":emergencycontactnumber,
+      
+
     });
   }
 
@@ -19,6 +31,18 @@ class DatabaseServices{
 
   static Future<QuerySnapshot> getLastVisitDoctor(String userid) async {
     return await userRecordsCollection.where("userid",isEqualTo: userid).orderBy("time1",descending: true).limit(1).get();
+  }
+
+   static Future<QuerySnapshot> getLastRecordid(String userid) async {
+    return await userRecordsCollection.where("userid",isEqualTo: userid).orderBy("time1",descending: true).limit(1).get();
+  }
+
+  static Future<QuerySnapshot> getInpatientList(String userid) async {
+    return await userRecordsCollection.where("userid",isEqualTo: userid).where("inoroutpatient",isEqualTo: "Inpatient").orderBy("time1",descending: true).get();
+  }
+
+  static Future<QuerySnapshot> getOutpatientList(String userid) async {
+    return await userRecordsCollection.where("userid",isEqualTo: userid).where("inoroutpatient",isEqualTo: "Outpatient").orderBy("time1",descending: true).get();
   }
 
   static Future<QuerySnapshot> getSickRecord(String recordid) async {

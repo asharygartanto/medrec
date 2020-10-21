@@ -19,7 +19,9 @@ ViewRecordPageState(this.recordid);
   @override
   Widget build (BuildContext ctxt) {
       return new Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text("Medical Recap"),
+        ),
         body: 
          FutureBuilder(
            builder: (context,snap){

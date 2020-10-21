@@ -25,6 +25,7 @@ class _MainHistoryState extends State<MainHistory>
     Size media = MediaQuery.of(context).size;
     return Scaffold(
         appBar: new AppBar(
+          title: Text("Sickness History"),
           //elevation: 0.7,
           backgroundColor:  Colors.blue,
           bottom: new TabBar(
