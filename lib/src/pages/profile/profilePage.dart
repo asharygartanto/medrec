@@ -610,6 +610,9 @@ class ProfilePageState extends State<ProfilePage>{
 
 
                 }
+              case ConnectionState.active:
+                // TODO: Handle this case.
+                break;
             }
           }
           ),

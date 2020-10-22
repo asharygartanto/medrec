@@ -275,6 +275,9 @@ final _formKey = GlobalKey<FormState>();
 
 
                     }
+                  case ConnectionState.active:
+                    // TODO: Handle this case.
+                    break;
                 }
               }
             )
