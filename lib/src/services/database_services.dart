@@ -21,7 +21,6 @@ class DatabaseServices{
       "emergencycontactname":emergencycontactname,
       "emergencycontactnumber":emergencycontactnumber,
       
-
     });
   }
 
