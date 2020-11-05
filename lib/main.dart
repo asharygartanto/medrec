@@ -27,25 +27,19 @@ Future<void> main() async {
       ),
     );*/
 
-    
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-   
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Medical Record',
       theme: new ThemeData(
         fontFamily: 'NeoSans',
-        
       ),
-      home: 
-            // redirect to the proper page
-             AuthService().getUser()!=null ? MyHomePage() : LoginTwoPage(),
-          
-        
-      
+      home:
+          // redirect to the proper page
+          AuthService().getUser() != null ? MyHomePage() : LoginTwoPage(),
+
       //new LoginTwoPage(),
     );
   }

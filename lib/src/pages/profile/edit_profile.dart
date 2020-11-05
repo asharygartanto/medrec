@@ -13,248 +13,335 @@ class EditProfilePage extends StatefulWidget {
   EditProfilePage({Key key, this.title}) : super(key: key);
 
   final String title;
-  
 
   @override
   EditProfilePageState createState() => EditProfilePageState();
 }
 
 class EditProfilePageState extends State<EditProfilePage> {
-  
-final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AllFieldsFormBloc(),
-      child: Builder(
-        builder: (context) {
+        create: (context) => AllFieldsFormBloc(),
+        child: Builder(builder: (context) {
           final formBloc = BlocProvider.of<AllFieldsFormBloc>(context);
           return Theme(
-            data: Theme.of(context).copyWith(
-              inputDecorationTheme: InputDecorationTheme(
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
+              data: Theme.of(context).copyWith(
+                inputDecorationTheme: InputDecorationTheme(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
               ),
-            ),
-          
-          child:Scaffold(
-            appBar: AppBar(title: Text('Edit Profile')),
-            body: FutureBuilder(
-              future: _getUserProfile(),
-              builder: (context,snap){
-                switch (snap.connectionState) {
-                    case ConnectionState.none: {
+              child: Scaffold(
+                  appBar: AppBar(title: Text('Edit Profile')),
+                  body: FutureBuilder(
+                      future: _getUserProfile(),
+                      builder: (context, snap) {
+                        switch (snap.connectionState) {
+                          case ConnectionState.none:
+                            {}
+                            break;
+                          case ConnectionState.waiting:
+                            {
+                              return LinearProgressIndicator();
+                            }
+                            break;
+                          case ConnectionState.done:
+                            {
+                              String _height = " ";
+                              String _weight = " ";
+                              DateTime _dateofbirth;
+                              String _blood = "";
+                              snap.data["weight"] != null
+                                  ? _weight = snap.data["weight"]
+                                  : _weight = "";
+                              snap.data["height"] != null
+                                  ? _height = snap.data["height"]
+                                  : _height = "";
+                              snap.data["dateofbirth"] != null
+                                  ? _dateofbirth = DateTime.parse(snap
+                                      .data["dateofbirth"]
+                                      .toDate()
+                                      .toString())
+                                  : _dateofbirth;
+                              snap.data["bloodtype"] != null
+                                  ? _blood = snap.data["bloodtype"].toString()
+                                  : _blood = "";
 
-                    } 
-                    break;        
-                    case ConnectionState.waiting:{
-                      return LinearProgressIndicator();
-                    }
-                    break;
-                    case ConnectionState.done:{
-                      formBloc.name.updateInitialValue(snap.data["fullname"].toString());
-                      formBloc.phonenumber.updateInitialValue(snap.data["phone"].toString());
-                      formBloc.placeofbirth.updateInitialValue(snap.data["placeofbirth"].toString());
-                      formBloc.weight.updateInitialValue(snap.data["weight"].toString());
-                      formBloc.height.updateInitialValue(snap.data["height"].toString());
-                      formBloc.address.updateInitialValue(snap.data["address"].toString());
-                      formBloc.ktp.updateInitialValue(snap.data["ktp"].toString());
-                      formBloc.allergic.updateInitialValue(snap.data["allergic"].toString());
-                      formBloc.bloodtype.updateInitialValue(snap.data["bloodtype"].toString());
-                      formBloc.dateofbirth.updateInitialValue(DateTime.parse(snap.data["dateofbirth"].toDate().toString()));
-                      formBloc.emergencycontactname.updateInitialValue(snap.data["emergencycontactname"].toString());
-                      formBloc.emergencycontactnumber.updateInitialValue(snap.data["emergencycontactnumber"].toString());
-                      
+                              formBloc.name.updateInitialValue(
+                                  snap.data["fullname"].toString());
 
-                      //formBloc.name = TextFieldBloc();
-                      return FormBlocListener<AllFieldsFormBloc, String, String>(
-                        onSubmitting: (context, state) {
-                          LoadingDialog.show(context);
-                          try{
-                            User user = AuthService().getUser();
-                          DatabaseServices.createOrUpdateUserProfile(user.uid,address: formBloc.address.value,fullname: formBloc.name.value,phone: formBloc.phonenumber.value,
-                          allergic: formBloc.allergic.value,bloodtype: formBloc.bloodtype.value,dateofbirth: formBloc.dateofbirth.value,emergencycontactname: formBloc.emergencycontactname.value,
-                          emergencycontactnumber: formBloc.emergencycontactnumber.value,ktp: formBloc.ktp.value,placeofbirth: formBloc.placeofbirth.value,height: formBloc.height.value,weight: formBloc.weight.value );
-                          }
-                          catch(e)
-                          {
-                            print(e);
-                          }
-                          
-                        },
-                        onSuccess: (context, state) {
-                          Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text("Data saved successfully")));
-                        
-                          LoadingDialog.hide(context);
+                              if (snap.data["phone"] != null)
+                                formBloc.phonenumber.updateInitialValue(
+                                    snap.data["phone"].toString());
 
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (_) => ProfilePage()));
-                        },
-                        onFailure: (context, state) {
-                          LoadingDialog.hide(context);
+                              if (snap.data["placeofbirth"] != null)
+                                formBloc.placeofbirth.updateInitialValue(
+                                    snap.data["placeofbirth"].toString());
+                              formBloc.weight.updateInitialValue(_weight);
+                              formBloc.height.updateInitialValue(_height);
 
-                          Scaffold.of(context).showSnackBar(
-                              SnackBar(content: Text(state.failureResponse)));
-                        },
-                        child: SingleChildScrollView(
-                          physics: ClampingScrollPhysics(),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: 
-                            Form(
-                              key: _formKey,
-                              child: 
-                                  Column(
-                                  children: <Widget>[
-                                  
-                                    TextFieldBlocBuilder(
-                                      //maxLines: 3,
-                                      
-                                      textFieldBloc: formBloc.name,
+                              if (snap.data["address"] != null)
+                                formBloc.address.updateInitialValue(
+                                    snap.data["address"].toString());
 
-                                      //keyboardType: TextInputType.multiline,
-                                      decoration: InputDecoration(
-                                        labelText: 'Name',
-                                        prefixIcon: Icon(Icons.people),
-                                      ),
-                                      
-                                    ),
-                                    DateTimeFieldBlocBuilder(
-                                      dateTimeFieldBloc: formBloc.dateofbirth,
-                                      canSelectTime: true,
-                                      format: DateFormat('dd-mm-yyyy'),
-                                      initialDate: DateTime.now(),
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime(2100),
-                                      decoration: InputDecoration(
-                                        labelText: 'Date of birth',
-                                        prefixIcon: Icon(Icons.date_range),
-                                        //helperText: 'Your birth Date',
-                                      ),
-                                    ),
-                                    TextFieldBlocBuilder(
-                                    //maxLines: 3,
-                                      textFieldBloc: formBloc.placeofbirth,
-                                      //keyboardType: TextInputType.multiline,
-                                      decoration: InputDecoration(
-                                        labelText: 'Place of birth',
-                                        prefixIcon: Icon(Icons.location_city),
-                                      ),
-                                    ),
-                                    TextFieldBlocBuilder(
-                                      //maxLines: 3,
-                                      textFieldBloc: formBloc.ktp,
-                                      keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        labelText: 'National Identity Number',
-                                        prefixIcon: Icon(Icons.confirmation_number),
-                                      ),
-                                    ),
-                                    TextFieldBlocBuilder(
-                                      maxLines: 3,
-                                      textFieldBloc: formBloc.address,
-                                      keyboardType: TextInputType.multiline,
-                                      decoration: InputDecoration(
-                                        labelText: 'Address',
-                                        prefixIcon: Icon(Icons.home),
-                                      ),
-                                    ),
-                                    TextFieldBlocBuilder(
-                                      //maxLines: 3,
-                                      textFieldBloc: formBloc.phonenumber,
-                                      //keyboardType: TextInputType.multiline,
-                                      decoration: InputDecoration(
-                                        labelText: 'Phone number',
-                                        prefixIcon: Icon(Icons.phone),
-                                      ),
-                                    ),
-                                    DropdownFieldBlocBuilder<String>(
-                                      selectFieldBloc: formBloc.bloodtype,
-                                      decoration: InputDecoration(
-                                        labelText: 'Blood type',
-                                        prefixIcon: Icon(Icons.person),
-                                      ),
-                                      itemBuilder: (context, value) => value,
-                                    ),
-                                    TextFieldBlocBuilder(
-                                      //maxLines: 3,
-                                      textFieldBloc: formBloc.height,
-                                      keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        labelText: 'Height',
-                                        prefixIcon: Icon(Icons.height),
-                                      ),
-                                    ),
-                                    TextFieldBlocBuilder(
-                                      //maxLines: 3,
-                                      textFieldBloc: formBloc.weight,
-                                      keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        labelText: 'Weight',
-                                        prefixIcon: Icon(Icons.confirmation_number),
-                                      ),
-                                    ),
-                                    TextFieldBlocBuilder(
-                                      maxLines: 3,
-                                      textFieldBloc: formBloc.allergic,
-                                      keyboardType: TextInputType.multiline,
-                                      decoration: InputDecoration(
-                                        labelText: 'Allergic',
-                                        prefixIcon: Icon(Icons.people,
-                                      ),
-                                    ),
-                                    ),
-                                    TextFieldBlocBuilder(
-                                      //maxLines: 3,
-                                      textFieldBloc: formBloc.emergencycontactname,
-                                      keyboardType: TextInputType.name,
-                                      decoration: InputDecoration(
-                                        labelText: 'Emergency Contact Name',
-                                        prefixIcon: Icon(Icons.people),
-                                      ),
-                                    ),
-                                  TextFieldBlocBuilder(
-                                      //maxLines: 3,
-                                      textFieldBloc: formBloc.emergencycontactnumber,
-                                      keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        labelText: 'Emergency Contact Number',
-                                        prefixIcon: Icon(Icons.people),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 25.0, right: 20.0, top: 15.0,bottom: 30),
-                                      child: new Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                              if (snap.data["ktp"] != null)
+                                formBloc.ktp.updateInitialValue(
+                                    snap.data["ktp"].toString());
+
+                              if (snap.data["allergic"] != null)
+                                formBloc.allergic.updateInitialValue(
+                                    snap.data["allergic"].toString());
+
+                              if (snap.data["bloodtype"] != null)
+                                formBloc.bloodtype.updateInitialValue(
+                                    snap.data["bloodtype"].toString());
+
+                              formBloc.dateofbirth
+                                  .updateInitialValue(_dateofbirth);
+
+                              if (snap.data["emergencycontactname"] != null)
+                                formBloc.emergencycontactname
+                                    .updateInitialValue(snap
+                                        .data["emergencycontactname"]
+                                        .toString());
+
+                              if (snap.data["emergencycontactnumber"] != null)
+                                formBloc.emergencycontactnumber
+                                    .updateInitialValue(snap
+                                        .data["emergencycontactnumber"]
+                                        .toString());
+
+                              //formBloc.name = TextFieldBloc();
+                              return FormBlocListener<AllFieldsFormBloc, String,
+                                  String>(
+                                onSubmitting: (context, state) {
+                                  LoadingDialog.show(context);
+                                  try {
+                                    User user = AuthService().getUser();
+                                    DatabaseServices.createOrUpdateUserProfile(
+                                        user.uid,
+                                        address: formBloc.address.value,
+                                        fullname: formBloc.name.value,
+                                        phone: formBloc.phonenumber.value,
+                                        allergic: formBloc.allergic.value,
+                                        bloodtype: formBloc.bloodtype.value,
+                                        dateofbirth: formBloc.dateofbirth.value,
+                                        emergencycontactname:
+                                            formBloc.emergencycontactname.value,
+                                        emergencycontactnumber: formBloc
+                                            .emergencycontactnumber.value,
+                                        ktp: formBloc.ktp.value,
+                                        placeofbirth:
+                                            formBloc.placeofbirth.value,
+                                        height: formBloc.height.value,
+                                        weight: formBloc.weight.value);
+                                  } catch (e) {
+                                    print(e);
+                                  }
+                                },
+                                onSuccess: (context, state) {
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                      content:
+                                          Text("Data saved successfully")));
+
+                                  LoadingDialog.hide(context);
+
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (_) => ProfilePage()));
+                                },
+                                onFailure: (context, state) {
+                                  LoadingDialog.hide(context);
+
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text(state.failureResponse)));
+                                },
+                                child: SingleChildScrollView(
+                                  physics: ClampingScrollPhysics(),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Form(
+                                      key: _formKey,
+                                      child: Column(
                                         children: <Widget>[
-                                          Flexible(
-                                            child: Padding(
-                                              padding: EdgeInsets.only(right: 5.0),
-                                              child: new OutlineButton(
-                                                child: new Text("Save"),
-                                                onPressed: (){
-                                                  formBloc.submit();
-                                                  },
-                                                borderSide: BorderSide(
-                                                  color: Colors.blue, //Color of the border
-                                                  style: BorderStyle.solid, //Style of the border
-                                                  width: 0.8, //width of the border
-                                                ),
-                                                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
-                                              )/*new TextField(
+                                          TextFieldBlocBuilder(
+                                            //maxLines: 3,
+
+                                            textFieldBloc: formBloc.name,
+
+                                            //keyboardType: TextInputType.multiline,
+                                            decoration: InputDecoration(
+                                              labelText: 'Name',
+                                              prefixIcon: Icon(Icons.people),
+                                            ),
+                                          ),
+                                          DateTimeFieldBlocBuilder(
+                                            dateTimeFieldBloc:
+                                                formBloc.dateofbirth,
+                                            canSelectTime: true,
+                                            format: DateFormat('dd-mm-yyyy'),
+                                            initialDate: DateTime.now(),
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime(2100),
+                                            decoration: InputDecoration(
+                                              labelText: 'Date of birth',
+                                              prefixIcon:
+                                                  Icon(Icons.date_range),
+                                              //helperText: 'Your birth Date',
+                                            ),
+                                          ),
+                                          TextFieldBlocBuilder(
+                                            //maxLines: 3,
+                                            textFieldBloc:
+                                                formBloc.placeofbirth,
+                                            //keyboardType: TextInputType.multiline,
+                                            decoration: InputDecoration(
+                                              labelText: 'Place of birth',
+                                              prefixIcon:
+                                                  Icon(Icons.location_city),
+                                            ),
+                                          ),
+                                          TextFieldBlocBuilder(
+                                            //maxLines: 3,
+                                            textFieldBloc: formBloc.ktp,
+                                            keyboardType: TextInputType.number,
+                                            decoration: InputDecoration(
+                                              labelText:
+                                                  'National Identity Number',
+                                              prefixIcon: Icon(
+                                                  Icons.confirmation_number),
+                                            ),
+                                          ),
+                                          TextFieldBlocBuilder(
+                                            maxLines: 3,
+                                            textFieldBloc: formBloc.address,
+                                            keyboardType:
+                                                TextInputType.multiline,
+                                            decoration: InputDecoration(
+                                              labelText: 'Address',
+                                              prefixIcon: Icon(Icons.home),
+                                            ),
+                                          ),
+                                          TextFieldBlocBuilder(
+                                            //maxLines: 3,
+                                            textFieldBloc: formBloc.phonenumber,
+                                            keyboardType: TextInputType.phone,
+                                            decoration: InputDecoration(
+                                              labelText: 'Phone number',
+                                              prefixIcon: Icon(Icons.phone),
+                                            ),
+                                          ),
+                                          DropdownFieldBlocBuilder<String>(
+                                            selectFieldBloc: formBloc.bloodtype,
+                                            decoration: InputDecoration(
+                                              labelText: 'Blood type',
+                                              prefixIcon: Icon(Icons.person),
+                                            ),
+                                            itemBuilder: (context, value) =>
+                                                value,
+                                          ),
+                                          TextFieldBlocBuilder(
+                                            //maxLines: 3,
+                                            textFieldBloc: formBloc.height,
+                                            keyboardType: TextInputType.number,
+                                            decoration: InputDecoration(
+                                              labelText: 'Height',
+                                              prefixIcon: Icon(Icons.height),
+                                            ),
+                                          ),
+                                          TextFieldBlocBuilder(
+                                            //maxLines: 3,
+                                            textFieldBloc: formBloc.weight,
+                                            keyboardType: TextInputType.number,
+                                            decoration: InputDecoration(
+                                              labelText: 'Weight',
+                                              prefixIcon: Icon(
+                                                  Icons.confirmation_number),
+                                            ),
+                                          ),
+                                          TextFieldBlocBuilder(
+                                            maxLines: 3,
+                                            textFieldBloc: formBloc.allergic,
+                                            keyboardType:
+                                                TextInputType.multiline,
+                                            decoration: InputDecoration(
+                                              labelText: 'Allergic',
+                                              prefixIcon: Icon(
+                                                Icons.food_bank,
+                                              ),
+                                            ),
+                                          ),
+                                          TextFieldBlocBuilder(
+                                            //maxLines: 3,
+                                            textFieldBloc:
+                                                formBloc.emergencycontactname,
+                                            keyboardType: TextInputType.name,
+                                            decoration: InputDecoration(
+                                              labelText:
+                                                  'Emergency Contact Name',
+                                              prefixIcon: Icon(Icons.people),
+                                            ),
+                                          ),
+                                          TextFieldBlocBuilder(
+                                            //maxLines: 3,
+                                            textFieldBloc:
+                                                formBloc.emergencycontactnumber,
+                                            keyboardType: TextInputType.phone,
+                                            decoration: InputDecoration(
+                                              labelText:
+                                                  'Emergency Contact Number',
+                                              prefixIcon: Icon(Icons.phone),
+                                            ),
+                                          ),
+                                          Padding(
+                                              padding: EdgeInsets.only(
+                                                  left: 25.0,
+                                                  right: 20.0,
+                                                  top: 15.0,
+                                                  bottom: 30),
+                                              child: new Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Flexible(
+                                                    child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                right: 5.0),
+                                                        child:
+                                                            new OutlineButton(
+                                                                child: new Text(
+                                                                    "Save"),
+                                                                onPressed: () {
+                                                                  formBloc
+                                                                      .submit();
+                                                                },
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: Colors
+                                                                      .blue, //Color of the border
+                                                                  style: BorderStyle
+                                                                      .solid, //Style of the border
+                                                                  width:
+                                                                      0.8, //width of the border
+                                                                ),
+                                                                shape: new RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        new BorderRadius.circular(
+                                                                            30.0))) /*new TextField(
                                                 decoration: const InputDecoration(
                                                     hintText: "Name"),
                                                 enabled: !_status,
                                               ),*/
-                                            ),
-                                            flex: 2,
-                                          ),
-                                          /*Flexible(
+                                                        ),
+                                                    flex: 2,
+                                                  ),
+                                                  /*Flexible(
                                             child: new TextField(
                                               decoration: const InputDecoration(
                                                   hintText: "Phone Number"),
@@ -262,38 +349,28 @@ final _formKey = GlobalKey<FormState>();
                                             ),
                                             flex: 2,
                                           ),*/
-                                          
+                                                ],
+                                              )),
                                         ],
-                                      )),
-                                  ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            
-                        ),
-                      );
-
-
-                    }
-                  case ConnectionState.active:
-                    // TODO: Handle this case.
-                    break;
-                }
-              }
-            )
-          )
-          );
-        }
-      )
-    );
+                              );
+                            }
+                          case ConnectionState.active:
+                            // TODO: Handle this case.
+                            break;
+                        }
+                      })));
+        }));
   }
 
   Future<DocumentSnapshot> _getUserProfile() async {
-    
-   DocumentSnapshot snapshot= await DatabaseServices.getUserProfile(FirebaseAuth.instance.currentUser.uid);
-   //print(snapshot.data());
-   return snapshot;
-      
+    DocumentSnapshot snapshot = await DatabaseServices.getUserProfile(
+        FirebaseAuth.instance.currentUser.uid);
+    //print(snapshot.data());
+    return snapshot;
   }
 }
 
@@ -310,8 +387,6 @@ class AllFieldsFormBloc extends FormBloc<String, String> {
   final emergencycontactname = TextFieldBloc();
 
   final emergencycontactnumber = TextFieldBloc();
-
-  
 
   final bloodtype = SelectFieldBloc(
     items: ['A', 'AB', 'B', 'O'],
@@ -358,5 +433,3 @@ class AllFieldsFormBloc extends FormBloc<String, String> {
     }
   }
 }
-
-

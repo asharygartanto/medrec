@@ -1,0 +1,134 @@
+
+App Thinning Size Report for All Variants of Runner
+
+Variant: Runner-01AD1333-10FE-4007-848D-B3E4FC5E2DE6.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 12.2]
+App + On Demand Resources size: 13,3 MB compressed, 37,4 MB uncompressed
+App size: 13,3 MB compressed, 37,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-0EDEC3C2-59A5-45C0-8D73-3A67D2C09C55.ipa
+Supported variant descriptors: [device: iPhone9,2, os-version: 12.0], [device: iPhone10,5, os-version: 12.0], [device: iPhone7,1, os-version: 12.0], [device: iPhone11,4, os-version: 12.0], [device: iPhone10,6, os-version: 12.0], [device: iPhone11,2, os-version: 12.0], [device: iPhone10,2, os-version: 12.0], [device: iPhone9,4, os-version: 12.0], [device: iPhone10,3, os-version: 12.0], [device: iPhone11,6, os-version: 12.0], and [device: iPhone8,2, os-version: 12.0]
+App + On Demand Resources size: 15,7 MB compressed, 44,4 MB uncompressed
+App size: 15,7 MB compressed, 44,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-26EE2CDF-007C-4932-9EC5-90DE35418EC7.ipa
+Supported variant descriptors: [device: iPad4,7, os-version: 12.0], [device: iPad4,9, os-version: 12.0], [device: iPad4,2, os-version: 12.0], [device: iPad8,3, os-version: 12.0], [device: iPad6,3, os-version: 12.0], [device: iPad7,4, os-version: 12.0], [device: iPad6,4, os-version: 12.0], [device: iPad8,8, os-version: 12.0], [device: iPad4,1, os-version: 12.0], [device: iPad5,4, os-version: 12.0], [device: iPad6,7, os-version: 12.0], [device: iPad4,4, os-version: 12.0], [device: iPad8,7, os-version: 12.0], [device: iPad8,6, os-version: 12.0], [device: iPad4,6, os-version: 12.0], [device: iPad4,8, os-version: 12.0], [device: iPad7,3, os-version: 12.0], [device: iPad8,2, os-version: 12.0], [device: iPad7,2, os-version: 12.0], [device: iPad5,3, os-version: 12.0], [device: iPad8,5, os-version: 12.0], [device: iPad8,1, os-version: 12.0], [device: iPad4,5, os-version: 12.0], [device: iPad7,6, os-version: 12.0], [device: iPad5,1, os-version: 12.0], [device: iPad8,4, os-version: 12.0], [device: iPad4,3, os-version: 12.0], [device: iPad7,1, os-version: 12.0], [device: iPad5,2, os-version: 12.0], [device: iPad6,12, os-version: 12.0], [device: iPad6,8, os-version: 12.0], [device: iPad6,11, os-version: 12.0], and [device: iPad7,5, os-version: 12.0]
+App + On Demand Resources size: 15,7 MB compressed, 44,4 MB uncompressed
+App size: 15,7 MB compressed, 44,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-346A23B9-1815-4AF0-A5F1-2D48599F2211.ipa
+Supported variant descriptors: [device: iPhone6,2, os-version: 12.2], [device: iPhone7,2, os-version: 12.2], [device: iPhone8,1, os-version: 12.2], [device: iPhone10,1, os-version: 12.2], [device: iPod9,1, os-version: 12.2], [device: iPhone10,4, os-version: 12.2], [device: iPhone6,1, os-version: 12.2], [device: iPhone9,1, os-version: 12.2], [device: iPod7,1, os-version: 12.2], [device: iPhone8,4, os-version: 12.2], and [device: iPhone9,3, os-version: 12.2]
+App + On Demand Resources size: 13,3 MB compressed, 37,4 MB uncompressed
+App size: 13,3 MB compressed, 37,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-3EB7020C-17D8-4D62-AADB-399B2975468B.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 12.0]
+App + On Demand Resources size: 15,7 MB compressed, 44,4 MB uncompressed
+App size: 15,7 MB compressed, 44,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-41EFFE7B-2D2F-4060-9602-4F81C3F67A0D.ipa
+Supported variant descriptors: [device: iPhone4,1, os-version: 9.0], [device: iPhone5,2, os-version: 9.0], [device: iPod5,1, os-version: 9.0], [device: iPhone5,1, os-version: 9.0], [device: iPhone5,3, os-version: 9.0], and [device: iPhone5,4, os-version: 9.0]
+App + On Demand Resources size: 16,5 MB compressed, 41,2 MB uncompressed
+App size: 16,5 MB compressed, 41,2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-561AC823-63C1-47A8-9231-FED814D3FD20.ipa
+Supported variant descriptors: [device: iPad4,2, os-version: 9.0], [device: iPad7,5, os-version: 11.0], [device: iPad6,8, os-version: 9.0], [device: iPad7,4, os-version: 10.0], [device: iPad4,6, os-version: 9.0], [device: iPad7,2, os-version: 10.0], [device: iPad4,7, os-version: 9.0], [device: iPad5,2, os-version: 9.0], [device: iPad5,4, os-version: 9.0], [device: iPad6,4, os-version: 9.0], [device: iPad4,3, os-version: 9.0], [device: iPad5,3, os-version: 9.0], [device: iPad4,9, os-version: 9.0], [device: iPad4,4, os-version: 9.0], [device: iPad7,3, os-version: 10.0], [device: iPad6,3, os-version: 9.0], [device: iPad4,5, os-version: 9.0], [device: iPad7,1, os-version: 10.0], [device: iPad6,11, os-version: 10.0], [device: iPad4,1, os-version: 9.0], [device: iPad6,7, os-version: 9.0], [device: iPad6,12, os-version: 10.0], [device: iPad5,1, os-version: 9.0], [device: iPad4,8, os-version: 9.0], and [device: iPad7,6, os-version: 11.0]
+App + On Demand Resources size: 15,7 MB compressed, 44,4 MB uncompressed
+App size: 15,7 MB compressed, 44,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-6F9B4BD0-8F7E-4765-9C6B-A4CAD215A521.ipa
+Supported variant descriptors: [device: iPhone9,2, os-version: 13.0], [device: iPhone11,4, os-version: 13.0], [device: iPhone10,6, os-version: 13.0], [device: iPhone11,2, os-version: 13.0], [device: iPhone9,4, os-version: 13.0], [device: iPhone10,2, os-version: 13.0], [device: iPhone8,2, os-version: 13.0], [device: iPhone11,6, os-version: 13.0], [device: iPhone10,3, os-version: 13.0], [device: iPhone12,3, os-version: 13.0], [device: iPhone12,5, os-version: 13.0], and [device: iPhone10,5, os-version: 13.0]
+App + On Demand Resources size: 13,3 MB compressed, 37,4 MB uncompressed
+App size: 13,3 MB compressed, 37,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-72946405-56ED-428E-9C18-67256732CBFB.ipa
+Supported variant descriptors: [device: iPad2,7, os-version: 9.0], [device: iPad2,2, os-version: 9.0], [device: iPad2,3, os-version: 9.0], [device: iPad2,5, os-version: 9.0], [device: iPad2,6, os-version: 9.0], [device: iPad2,1, os-version: 9.0], and [device: iPad2,4, os-version: 9.0]
+App + On Demand Resources size: 16,5 MB compressed, 41,2 MB uncompressed
+App size: 16,5 MB compressed, 41,2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-87F6CAA9-762D-40F5-A86E-D5D05C79C5B6.ipa
+Supported variant descriptors: [device: iPad6,3, os-version: 13.0], [device: iPad5,2, os-version: 13.0], [device: iPad5,4, os-version: 13.0], [device: iPad6,7, os-version: 13.0], [device: iPad8,11, os-version: 13.0], [device: iPad5,3, os-version: 13.0], [device: iPad8,10, os-version: 13.0], [device: iPad11,3, os-version: 13.0], [device: iPad7,3, os-version: 13.0], [device: iPad7,1, os-version: 13.0], [device: iPad7,6, os-version: 13.0], [device: iPad8,2, os-version: 13.0], [device: iPad8,12, os-version: 13.0], [device: iPad7,12, os-version: 13.0], [device: iPad8,6, os-version: 13.0], [device: iPad7,4, os-version: 13.0], [device: iPad7,11, os-version: 13.0], [device: iPad11,4, os-version: 13.0], [device: iPad8,7, os-version: 13.0], [device: iPad8,8, os-version: 13.0], [device: iPad7,5, os-version: 13.0], [device: iPad11,1, os-version: 13.0], [device: iPad8,3, os-version: 13.0], [device: iPad6,4, os-version: 13.0], [device: iPad7,2, os-version: 13.0], [device: iPad6,11, os-version: 13.0], [device: iPad5,1, os-version: 13.0], [device: iPad6,8, os-version: 13.0], [device: iPad8,5, os-version: 13.0], [device: iPad6,12, os-version: 13.0], [device: iPad11,2, os-version: 13.0], [device: iPad8,1, os-version: 13.0], [device: iPad8,4, os-version: 13.0], and [device: iPad8,9, os-version: 13.0]
+App + On Demand Resources size: 13,3 MB compressed, 37,4 MB uncompressed
+App size: 13,3 MB compressed, 37,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-883A8974-B8EF-4C71-98B7-DE605433AB3B.ipa
+Supported variant descriptors: [device: iPhone8,4, os-version: 12.0], [device: iPod7,1, os-version: 12.0], [device: iPhone10,1, os-version: 12.0], [device: iPhone9,3, os-version: 12.0], [device: iPhone9,1, os-version: 12.0], [device: iPhone10,4, os-version: 12.0], [device: iPhone7,2, os-version: 12.0], [device: iPhone6,1, os-version: 12.0], [device: iPhone6,2, os-version: 12.0], and [device: iPhone8,1, os-version: 12.0]
+App + On Demand Resources size: 15,7 MB compressed, 44,4 MB uncompressed
+App size: 15,7 MB compressed, 44,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-9E7B058F-01C7-4302-A080-1078D48D34C0.ipa
+Supported variant descriptors: [device: iPad3,3, os-version: 9.0], [device: iPad3,6, os-version: 9.0], [device: iPad3,4, os-version: 9.0], [device: iPad3,5, os-version: 9.0], [device: iPad3,1, os-version: 9.0], and [device: iPad3,2, os-version: 9.0]
+App + On Demand Resources size: 16,5 MB compressed, 41,2 MB uncompressed
+App size: 16,5 MB compressed, 41,2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-B6A2B441-FF77-4C4C-B353-517C5542209C.ipa
+Supported variant descriptors: [device: iPhone11,4, os-version: 12.2], [device: iPhone11,6, os-version: 12.2], [device: iPhone9,2, os-version: 12.2], [device: iPhone7,1, os-version: 12.2], [device: iPhone10,3, os-version: 12.2], [device: iPhone10,5, os-version: 12.2], [device: iPhone8,2, os-version: 12.2], [device: iPhone10,2, os-version: 12.2], [device: iPhone11,2, os-version: 12.2], [device: iPhone9,4, os-version: 12.2], and [device: iPhone10,6, os-version: 12.2]
+App + On Demand Resources size: 13,3 MB compressed, 37,4 MB uncompressed
+App size: 13,3 MB compressed, 37,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-CC021DE6-10F7-4406-83AC-BC7C085666A9.ipa
+Supported variant descriptors: [device: iPad6,8, os-version: 12.2], [device: iPad8,2, os-version: 12.2], [device: iPad5,1, os-version: 12.2], [device: iPad11,3, os-version: 12.2], [device: iPad7,6, os-version: 12.2], [device: iPad6,3, os-version: 12.2], [device: iPad6,4, os-version: 12.2], [device: iPad6,11, os-version: 12.2], [device: iPad7,3, os-version: 12.2], [device: iPad7,1, os-version: 12.2], [device: iPad8,4, os-version: 12.2], [device: iPad8,1, os-version: 12.2], [device: iPad4,6, os-version: 12.2], [device: iPad6,7, os-version: 12.2], [device: iPad5,4, os-version: 12.2], [device: iPad11,4, os-version: 12.2], [device: iPad5,3, os-version: 12.2], [device: iPad8,5, os-version: 12.2], [device: iPad11,2, os-version: 12.2], [device: iPad4,2, os-version: 12.2], [device: iPad4,9, os-version: 12.2], [device: iPad4,3, os-version: 12.2], [device: iPad5,2, os-version: 12.2], [device: iPad8,6, os-version: 12.2], [device: iPad7,2, os-version: 12.2], [device: iPad4,1, os-version: 12.2], [device: iPad8,3, os-version: 12.2], [device: iPad7,5, os-version: 12.2], [device: iPad4,5, os-version: 12.2], [device: iPad8,8, os-version: 12.2], [device: iPad4,7, os-version: 12.2], [device: iPad4,8, os-version: 12.2], [device: iPad6,12, os-version: 12.2], [device: iPad4,4, os-version: 12.2], [device: iPad7,4, os-version: 12.2], [device: iPad8,7, os-version: 12.2], and [device: iPad11,1, os-version: 12.2]
+App + On Demand Resources size: 13,3 MB compressed, 37,4 MB uncompressed
+App size: 13,3 MB compressed, 37,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-EF683853-D179-40A6-913C-0C6DBB3D7500.ipa
+Supported variant descriptors: [device: iPhone9,3, os-version: 10.0], [device: iPhone10,1, os-version: 11.0], [device: iPhone10,4, os-version: 11.0], [device: iPod7,1, os-version: 9.0], [device: iPhone6,1, os-version: 9.0], [device: iPhone7,2, os-version: 9.0], [device: iPhone8,1, os-version: 9.0], [device: iPhone8,4, os-version: 9.0], [device: iPhone9,1, os-version: 10.0], and [device: iPhone6,2, os-version: 9.0]
+App + On Demand Resources size: 15,7 MB compressed, 44,4 MB uncompressed
+App size: 15,7 MB compressed, 44,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-FC0E56C9-D763-42A1-A9F5-27174053F493.ipa
+Supported variant descriptors: [device: iPhone12,1, os-version: 13.0] and [device: iPhone11,8, os-version: 13.0]
+App + On Demand Resources size: 13,3 MB compressed, 37,4 MB uncompressed
+App size: 13,3 MB compressed, 37,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-FE3972FF-5E2B-49FC-949F-A3FD2DD07C2C.ipa
+Supported variant descriptors: [device: iPhone10,6, os-version: 11.0], [device: iPhone10,5, os-version: 11.0], [device: iPhone9,4, os-version: 10.0], [device: iPhone10,2, os-version: 11.0], [device: iPhone10,3, os-version: 11.0], [device: iPhone9,2, os-version: 10.0], [device: iPhone7,1, os-version: 9.0], and [device: iPhone8,2, os-version: 9.0]
+App + On Demand Resources size: 15,7 MB compressed, 44,4 MB uncompressed
+App size: 15,7 MB compressed, 44,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner-FE86AE62-F745-41A1-86E5-96E4656320A7.ipa
+Supported variant descriptors: [device: iPhone9,1, os-version: 13.0], [device: iPhone10,1, os-version: 13.0], [device: iPhone9,3, os-version: 13.0], [device: iPhone8,1, os-version: 13.0], [device: iPhone10,4, os-version: 13.0], [device: iPod9,1, os-version: 13.0], [device: iPhone8,4, os-version: 13.0], and [device: iPhone12,8, os-version: 13.0]
+App + On Demand Resources size: 13,3 MB compressed, 37,4 MB uncompressed
+App size: 13,3 MB compressed, 37,4 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed
+
+
+Variant: Runner.ipa
+Supported variant descriptors: Universal
+App + On Demand Resources size: 30,2 MB compressed, 82,8 MB uncompressed
+App size: 30,2 MB compressed, 82,8 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed

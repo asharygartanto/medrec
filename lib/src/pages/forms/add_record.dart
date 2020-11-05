@@ -1,10 +1,21 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
+import 'package:medrec/core/presentation/res/assets.dart';
 import 'package:medrec/src/pages/home/home.dart';
 import 'package:medrec/src/services/auth.dart';
 import 'package:medrec/src/services/database_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medrec/src/widgets/loadings/loading_add_record.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class AddMedicalReCordPage extends StatefulWidget {
   AddMedicalReCordPage({Key key, this.title}) : super(key: key);
@@ -19,9 +30,21 @@ class AddMedicalReCordPage extends StatefulWidget {
 class AddMedicalReCordPageState extends State<AddMedicalReCordPage> {
   
 final _formKey = GlobalKey<FormState>();
+  SharedPreferences sharedPreferences;
+  //TypeOperation typeOperation = TypeOperation.download;
+  final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+  final String keyMyPosts = 'keyMyPosts';
+  bool isLoading = true;
+  bool isSuccess = true;
+  bool isGridView = true;
+  final List<String> myPosts = [];
+  User user;
+  String _recordid;
+  bool isComplete =false;
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return BlocProvider(
       create: (context) => AllFieldsFormBloc(),
       child: Builder(
@@ -42,7 +65,7 @@ final _formKey = GlobalKey<FormState>();
                 onSubmitting: (context, state) {
                   LoadingDialog.show(context);
                   try{
-                    User user = AuthService().getUser();
+                     user = AuthService().getUser();
                   DatabaseServices.createOrUpdateUserDataRecord(user.uid,anamnesis: formBloc.anamnesis.value,
                   diagnosis: formBloc.diagnosis.value,docter: formBloc.docter.value,
                   hospital: formBloc.hospital.value,medicalTreatment: formBloc.medicalTreatment.value,
@@ -56,13 +79,28 @@ final _formKey = GlobalKey<FormState>();
                   
                 },
                 onSuccess: (context, state) {
+                  _getLastRecordid().then((value) => {
+                    _recordid=value
+                  }).whenComplete(() {
+                    if(_recordid!=""){
+                      isComplete=true;
+                    LoadingDialog.hide(context);
+                    }
+                    
+                  
+                  }
+                  );
+                  
+
                   Scaffold.of(context).showSnackBar(
                       SnackBar(content: Text("Data saved successfully")));
                 
-                  LoadingDialog.hide(context);
+                  
 
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (_) => MyHomePage()));
+                 
+
+                 // Navigator.of(context).pushReplacement(
+                 //     MaterialPageRoute(builder: (_) => MyHomePage()));
                 },
                 onFailure: (context, state) {
                   LoadingDialog.hide(context);
@@ -204,6 +242,64 @@ final _formKey = GlobalKey<FormState>();
                                   
                                 ],
                               )),
+                              /*Padding(
+                              padding: EdgeInsets.only(
+                                  left: 25.0, right: 20.0, top: 5.0,bottom: 30),
+                              child:
+                                Center(
+                                  child: Column(
+                                    children: [
+                                      OutlineButton(
+                                      onPressed: () async {
+                                        File image = await ImagePicker.pickImage(source: ImageSource.gallery);
+                                        if (image == null) {
+                                          return;
+                                        }
+                                        List<String> splitPath = image.path.split('/');
+                                        String filename = splitPath[splitPath.length - 1];
+                                        StorageReference ref = firebaseStorage.ref().child('images').child(filename);
+                                        StorageUploadTask uploadTask = ref.putFile(image);
+                                        StreamSubscription streamSubscription = uploadTask.events.listen((event) async {
+                                          var eventType = event.type;
+                                          if (eventType == StorageTaskEventType.progress) {
+                                            setState(() {
+                                              //typeOperation = TypeOperation.upload;
+                                              isLoading = true;
+                                            });
+                                          } else if (eventType == StorageTaskEventType.failure) {
+                                            SnackBar(
+                                              content: Text('Photo failed to upload'),
+                                            );
+                                            setState(() {
+                                              isLoading = false;
+                                              isSuccess = false;
+                                              //typeOperation = null;
+                                            });
+                                          } else if (eventType == StorageTaskEventType.success) {
+                                            var downloadUrl = await event.snapshot.ref.getDownloadURL();
+                                            myPosts.add(downloadUrl);
+                                            //sharedPreferences.setStringList(keyMyPosts, myPosts);
+                                            SnackBar(
+                                              content: Text('Photo uploaded successfully'),
+                                            );
+                                            setState(() {
+                                              isLoading = false;
+                                              isSuccess = true;
+                                            // typeOperation = null;
+                                            });
+                                          }
+                                        });
+                                        await uploadTask.onComplete;
+                                        streamSubscription.cancel();
+                                      },
+                                      child: Text("Add Attachment"),
+                                      ),
+                                      _buildWidgetMyPosts()
+                                    ],
+                                  )
+                                  
+                                ) 
+                              ),*/
                           ],
                         ),
                       ),
@@ -216,6 +312,117 @@ final _formKey = GlobalKey<FormState>();
         }
       )
     );
+  }
+
+   Widget _buildWidgetMyPosts() {
+    if (isLoading ) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    } else if (myPosts.isEmpty) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          WidgetTextMont(
+            'No post available',
+            fontWeight: FontWeight.bold,
+            fontSize: 56,
+            textColor: Colors.grey[600],
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(24),
+          ),
+          WidgetTextMont(
+            'When you share photos and videos, they\'ll appear in here',
+            textAlign: TextAlign.center,
+            textColor: Colors.grey[700],
+          ),
+        ],
+      );
+    } else {
+      double paddingBottomScreen = MediaQuery.of(context).padding.bottom;
+      return isGridView
+          ? Padding(
+              padding: EdgeInsets.only(
+                top: 10,
+                bottom: 10,
+              ),
+              child: GridView.count(
+                padding: EdgeInsets.zero,
+                crossAxisCount: 3,
+                children: myPosts.map(
+                  (item) {
+                    return ClipRRect(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: item,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) {
+                          return Image.asset(
+                            img_placeholder,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                        errorWidget: (context, url, error) {
+                          return Image.asset(
+                            img_not_found,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                ).toList(),
+                crossAxisSpacing: ScreenUtil().setWidth(48),
+                mainAxisSpacing: ScreenUtil().setHeight(48),
+              ),
+            )
+          : Padding(
+              padding: EdgeInsets.only(
+                top: ScreenUtil().setHeight(48),
+                bottom: paddingBottomScreen == 0 ? ScreenUtil().setHeight(48) : paddingBottomScreen,
+              ),
+              child: ListView.separated(
+                padding: EdgeInsets.zero,
+                itemCount: myPosts.length,
+                separatorBuilder: (context, index) {
+                  return SizedBox(
+                    height: ScreenUtil().setHeight(48),
+                  );
+                },
+                itemBuilder: (context, index) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: CachedNetworkImage(
+                      imageUrl: myPosts[index],
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) {
+                        return Image.asset(
+                          img_placeholder,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                      errorWidget: (context, url, error) {
+                        return Image.asset(
+                          img_not_found,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            );
+    }
+  }
+
+  Future<String> _getLastRecordid() async {
+    
+   QuerySnapshot snapshot= await DatabaseServices.getLastRecordid(FirebaseAuth.instance.currentUser.uid);
+   return snapshot.docs[0]["recordid"].toString();
+      
   }
 }
 
@@ -276,6 +483,36 @@ class AllFieldsFormBloc extends FormBloc<String, String> {
     } catch (e) {
       emitFailure();
     }
+  }
+}
+
+class WidgetTextMont extends StatelessWidget {
+  final String text;
+  final double fontSize;
+  final FontWeight fontWeight;
+  final Color textColor;
+  final TextAlign textAlign;
+
+  WidgetTextMont(
+    this.text, {
+    this.fontSize = 36,
+    this.fontWeight = FontWeight.normal,
+    this.textColor = Colors.white,
+    this.textAlign = TextAlign.left,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: textColor,
+        fontSize: ScreenUtil().setSp(fontSize),
+        fontWeight: fontWeight,
+        fontFamily: 'Mont',
+      ),
+      textAlign: textAlign,
+    );
   }
 }
 

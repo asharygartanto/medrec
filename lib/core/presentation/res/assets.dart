@@ -10,6 +10,8 @@ const String img_hospital1 = 'assets/img/hospital1.png';
 const String img_hospital2 = 'assets/img/hospital2.png';
 const String flag_uk = 'assets/icon/uk.png';
 const String flag_ind = 'assets/icon/indonesia.png';
+const String img_not_found = 'assets/img/img_not_found.jpg';
+const String img_placeholder = 'assets/img/img_placeholder.jpg';
 
 const String fishtail =
     'https://firebasestorage.googleapis.com/v0/b/dl-flutter-ui-challenges.appspot.com/o/travel%2Ffishtail.jpg?alt=media';

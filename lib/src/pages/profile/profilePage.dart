@@ -61,6 +61,12 @@ class ProfilePageState extends State<ProfilePage>{
                 }
                 break;
                 case ConnectionState.done:{
+                  String _height = " ";
+                  String _weight = " ";
+                  //if(snap.data["weight"]!=null)_weight=snap.data["weight"];
+                  //if(snap.data["height"]!=null)_height=snap.data["weight"];
+                  snap.data["weight"]!=null?_weight=snap.data["weight"]:_weight="";
+                  snap.data["height"]!=null?_height=snap.data["height"]:_height="";
                   return SlidingUpPanel(
                     renderPanelSheet: false,
                     panel: _floatingPanel(),
@@ -267,7 +273,7 @@ class ProfilePageState extends State<ProfilePage>{
                                                       decoration: const InputDecoration(
                                                           hintText: "Enter Date of Birth"),
                                                       enabled: !_status,
-                                                      controller: TextEditingController(text:datef.format(DateTime.parse(snap.data["dateofbirth"].toDate().toString()) )),
+                                                      controller: snap.data["dateofbirth"]!=null?TextEditingController(text:datef.format(DateTime.parse(snap.data["dateofbirth"].toDate().toString()) )):TextEditingController(text:""),
                                                     ),
                                                   ),
                                                 ],
@@ -435,7 +441,7 @@ class ProfilePageState extends State<ProfilePage>{
                                                       decoration: const InputDecoration(
                                                           hintText: "Height/Weight"),
                                                       enabled: !_status,
-                                                      controller: TextEditingController(text: snap.data["height"]+"/"+snap.data["weight"]),
+                                                     controller: TextEditingController(text: _height+"/"+_weight),
                                                     ),
                                                     flex: 2,
                                                   ),
